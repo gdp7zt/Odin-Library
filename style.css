@@ -94,13 +94,41 @@ body{
 #box{
     visibility: hidden;
     position: fixed;
-    top: 25vh;
-    left: 25vh;
     background-color: whitesmoke;
     z-index: 100;
     width: 300px;
     height: 400px;
     padding: 20px;
+}
+
+#box form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+#box form > div{
+    display: flex;
+    justify-content: space-between;
+}
+
+#box label{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Arvo', serif;
+}
+
+#box form input[type="submit"]{
+    color: white;
+    font-size: 18px;
+    background-color: #008CBA;
+    border:0;
+    width: 120px;
+    height: 50px;
+    border-radius: 12px;
+    align-self: center;
 }
 
 .dimmer{

@@ -1,7 +1,12 @@
+
+/* Library storage array for the books */
 let myLibrary = [];
 
 const container = document.querySelector(".container");
+const formSubmit = document.getElementById("submitButton");
 
+
+/* Constructor to assign a book some values */
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
@@ -17,19 +22,23 @@ function Book(title, author, pages, isRead) {
     }
 }
 
-function addBookToLibrary(){
-    let title = prompt("Title: ");
-    let author = prompt("Author: ");
-    let pages = prompt("Pages: ");
-    let isRead = prompt("Has the book been read? (y/n): ");
-    if(isRead === 'y') isRead = true;
-    else isRead = false;
-    const newBook = new Book(title, author, pages, isRead);
-    myLibrary.push(newBook);
+function addBookToLibrary(title, author, pages, isRead){
+    let addBook = new Book();
+    addBook.title = title;
+    addBook.author = author;
+    addBook.pages = pages;
+    addBook.isRead = isRead;
+    myLibrary.push(addBook);
 }
 
 function displayBooks(){
     mainDiv = document.querySelector('.cardContainer');
+    /* This will remove all children currently displayed to prevent the same child being added twice */
+    while(mainDiv.firstChild){
+        mainDiv.removeChild(mainDiv.firstChild);
+    }
+
+    /*This function adds a entry in for each book currently in the array*/
     myLibrary.forEach(function(entry){
         const outsideDiv = document.createElement('div');
         outsideDiv.classList.add('card');
@@ -41,7 +50,7 @@ function displayBooks(){
         const pagesDiv = document.createElement('div');
         pagesDiv.innerHTML = entry.pages;
         const readDiv = document.createElement('div');
-        if(entry.isRead === 'y') {
+        if(entry.isRead) {
             readDiv.classList.add('read');
             readDiv.innerHTML = 'Read';
         }
@@ -57,12 +66,31 @@ function displayBooks(){
     });
 }
 
+/* When a user adds a new book, this function will be called to add it to the array and display it */
+function submit(){
+    const newTitle = document.getElementById("title");
+    const newAuthor = document.getElementById('author');
+    const newPages = document.getElementById('pages');
+    const newIsRead = document.getElementById('read');
+
+    addBookToLibrary(newTitle.value, newAuthor.value, newPages.value, newIsRead.checked);
+
+    newTitle.value = null;
+    newAuthor.value = null;
+    newPages.value = null;
+
+    displayBooks();
+}
+
+
+/* This function is called when a user adds a book to display the popup form */
 let popupOpener = document.getElementById("addBook");
 
 popupOpener.onclick = function(){
 
     let box = document.getElementById("box"),
         dimmer = document.createElement("div");
+
     dimmer.style.width = document.documentElement.scrollWidth + 'px';
     dimmer.style.height = document.documentElement.scrollHeight + 'px';
     dimmer.className = 'dimmer';
@@ -70,6 +98,13 @@ popupOpener.onclick = function(){
     dimmer.onclick = function(){
         document.body.removeChild(this);
         box.style.visibility = 'hidden';
+    }
+
+    formSubmit.onclick = function(){
+        submit();
+        document.body.removeChild(dimmer);
+        box.style.visibility='hidden';
+        return false;
     }
 
     document.body.appendChild(dimmer);
@@ -80,17 +115,3 @@ popupOpener.onclick = function(){
     box.style.transform = "translate(-50%, -50%)";
     return false;
 }
-
-
-
-
-let book1 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book2 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'n');
-let book3 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book4 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book5 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book6 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book7 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-let book8 = new Book('The mockingbird', 'Mary Jane Blige', 578, 'y');
-myLibrary.push(book1, book2, book3, book4, book5, book6, book7, book8);
-displayBooks();
