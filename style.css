@@ -4,7 +4,7 @@ body{
 
 .layout{
     display: grid;
-    grid-template-rows: 10vh 80vh 10vh;
+    grid-template-rows: 95px auto 95px;
 }
 
 .header{
@@ -16,15 +16,66 @@ body{
 
 .main{
     background-color: rgb(238, 238, 238);
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main .addBook{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 0;
+    align-self: center;
+    margin-top: 25px;
+}
+
+.addBook:hover{
+    background-color: lightgray;
+}
+
+.cardContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px 100px;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .main .card{
     background-color: white;
-    box-shadow: 6px 6px -3px 3px rgb(211, 211, 211);
-    height: 10vh;
-    width: 10vh;
+    z-index: 10;
+    box-shadow: 6px 6px 2px -2px rgba(192, 192, 192, 0.6);
+    height: 280px;
+    width: 310px;
+    border-radius: 10px;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1.5fr;
+    padding: 10px 20px;
 }
 
+.card > div{
+    font-size: 1.5rem;
+    font-family: 'Arvo', serif;
+    display: grid;
+    place-items: center;
+}
+
+.card .read{
+    background-color: lightgreen;
+    border-radius: 10px;
+    margin: 20px 10px;
+}
+
+.card .unread{
+    background-color: lightcoral;
+    border-radius: 10px;
+    margin: 20px 10px;
+}
 .footer{
     display: flex;
     justify-content: center;
@@ -38,4 +89,24 @@ body{
 
 .footerContent a{
     margin-left: 20px;
+}
+
+#box{
+    visibility: hidden;
+    position: fixed;
+    top: 25vh;
+    left: 25vh;
+    background-color: whitesmoke;
+    z-index: 100;
+    width: 300px;
+    height: 400px;
+    padding: 20px;
+}
+
+.dimmer{
+    background-color: #000;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    z-index: 99;
 }
