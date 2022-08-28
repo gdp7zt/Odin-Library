@@ -138,20 +138,24 @@ popupOpener.onclick = function(){
 }
 
 function booksDisplayed(){
-        let deleteButton = document.getElementById('deleteButton');
-        deleteButton.addEventListener('click', () => {
-            let arrayValue = deleteButton.getAttribute("data-v");
+    let deleteButton = document.querySelectorAll('.deleteButton');
+    for (let i = 0; i < deleteButton.length; i++){
+        deleteButton[i].addEventListener('click', () =>{
+            let arrayValue = deleteButton[i].getAttribute('data-v');
             myLibrary.splice(arrayValue, 1);
             displayBooks();
         });
+    }
 }
 
 function changedRead(){
-    let readButton = document.getElementById('readButton');
-    let deleteButton = document.getElementById('deleteButton');
-    readButton.addEventListener('click', () => {
-        let arrayValue = deleteButton.getAttribute("data-v");
-        myLibrary[arrayValue].changedRead();
-        displayBooks();
-    });
+    let readButton = document.querySelectorAll('#readButton');
+    let deleteButton = document.querySelectorAll('.deleteButton');
+    for (let i = 0; i < readButton.length; i++){
+        readButton[i].addEventListener('click', () => {
+            let arrayValue = deleteButton[i].getAttribute("data-v");
+            myLibrary[arrayValue].changedRead();
+            displayBooks();
+        });
+    }
 }
