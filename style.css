@@ -54,7 +54,7 @@ body{
     border-radius: 10px;
 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr 1fr 1.5fr 1.5fr;
     padding: 10px 20px;
 }
 
@@ -66,16 +66,70 @@ body{
 }
 
 .card .read{
-    background-color: lightgreen;
+    background-color: rgb(144, 238, 144);
     border-radius: 10px;
-    margin: 20px 10px;
+    margin: 10px 10px;
+    border: 0;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: relative;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.5);
 }
 
-.card .unread{
-    background-color: lightcoral;
-    border-radius: 10px;
-    margin: 20px 10px;
+.read:hover{
+    background-color: rgb(114, 199, 114);
 }
+
+.read:active{
+    top: 2px;
+    left: 1px;
+    box-shadow: none;
+}
+.card .unread{
+    background-color: rgb(240, 128, 128);
+    border-radius: 10px;
+    margin: 10px 10px;
+    border: 0;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.unread:hover{
+    background-color: rgb(224, 95, 95);
+}
+
+.unread:active{
+    top: 2px;
+    left: 1px;
+    box-shadow: none;
+}
+
+.deleteButton{
+    background-color: rgb(243, 242, 242);
+    border-radius: 10px;
+    margin: 10px 10px;
+    border:0;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.deleteButton:hover{
+    background-color: rgb(211, 211, 211);
+}
+
+.deleteButton:active{
+    top: 2px;
+    left: 1px;
+    box-shadow: none;
+}
+
 .footer{
     display: flex;
     justify-content: center;

@@ -13,12 +13,18 @@ function Book(title, author, pages, isRead) {
     this.pages = pages;
     this.isRead = isRead;
     this.sayInfo = function() {
-        if(isRead){
+        if(this.isRead){
             return `${title} by ${author}, ${pages} pages, has been read`;
         }
         else{
             return `${title} by ${author}, ${pages} pages, not read yet`
         }
+    }
+    this.changedRead = function() {
+        if(this.isRead){
+            this.isRead = false;
+        }
+        else this.isRead = true;
     }
 }
 
@@ -39,31 +45,46 @@ function displayBooks(){
     }
 
     /*This function adds a entry in for each book currently in the array*/
-    myLibrary.forEach(function(entry){
+    myLibrary.forEach(function(entry, index){
         const outsideDiv = document.createElement('div');
         outsideDiv.classList.add('card');
 
         const titleDiv = document.createElement('div');
         titleDiv.innerHTML = "\"" + entry.title + "\"";
         const authorDiv = document.createElement('div');
-        authorDiv.innerHTML = entry.author;
+        authorDiv.innerHTML = "Author:      " + entry.author;
         const pagesDiv = document.createElement('div');
-        pagesDiv.innerHTML = entry.pages;
-        const readDiv = document.createElement('div');
+        pagesDiv.innerHTML = "Pages:       " + entry.pages;
+        const readDiv = document.createElement('input');
+        readDiv.setAttribute("type", "button");
+        readDiv.setAttribute("id", "readButton");
+        readDiv.setAttribute("name", "readButton");
+
+        const deleteButton = document.createElement('input');
+        deleteButton.setAttribute("type", "button");
+        deleteButton.setAttribute("id", "deleteButton");
+        deleteButton.setAttribute("name", "deleteButton");
+        deleteButton.setAttribute("data-v", `${index}`);
+        deleteButton.setAttribute("value", 'Remove');
+        deleteButton.classList.add("deleteButton");
+
         if(entry.isRead) {
             readDiv.classList.add('read');
-            readDiv.innerHTML = 'Read';
+            readDiv.setAttribute("value", 'Read');
         }
         else {
             readDiv.classList.add('unread');
-            readDiv.innerHTML = 'Not read';
+            readDiv.setAttribute("value", 'Unread');
         }
         outsideDiv.appendChild(titleDiv);
         outsideDiv.appendChild(authorDiv);
         outsideDiv.appendChild(pagesDiv);
         outsideDiv.appendChild(readDiv);
+        outsideDiv.appendChild(deleteButton);
         mainDiv.appendChild(outsideDiv);
     });
+    if(document.getElementById('deleteButton') !== null) booksDisplayed();
+    changedRead();
 }
 
 /* When a user adds a new book, this function will be called to add it to the array and display it */
@@ -114,4 +135,23 @@ popupOpener.onclick = function(){
     box.style.left = '50%';
     box.style.transform = "translate(-50%, -50%)";
     return false;
+}
+
+function booksDisplayed(){
+        let deleteButton = document.getElementById('deleteButton');
+        deleteButton.addEventListener('click', () => {
+            let arrayValue = deleteButton.getAttribute("data-v");
+            myLibrary.splice(arrayValue, 1);
+            displayBooks();
+        });
+}
+
+function changedRead(){
+    let readButton = document.getElementById('readButton');
+    let deleteButton = document.getElementById('deleteButton');
+    readButton.addEventListener('click', () => {
+        let arrayValue = deleteButton.getAttribute("data-v");
+        myLibrary[arrayValue].changedRead();
+        displayBooks();
+    });
 }
