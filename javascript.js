@@ -20,6 +20,7 @@ function Book(title, author, pages, isRead) {
             return `${title} by ${author}, ${pages} pages, not read yet`
         }
     }
+    /* This method changes the isRead status */
     this.changedRead = function() {
         if(this.isRead){
             this.isRead = false;
@@ -28,6 +29,7 @@ function Book(title, author, pages, isRead) {
     }
 }
 
+/* This function adds a new book to the library using the constructor */
 function addBookToLibrary(title, author, pages, isRead){
     let addBook = new Book();
     addBook.title = title;
@@ -83,6 +85,7 @@ function displayBooks(){
         outsideDiv.appendChild(deleteButton);
         mainDiv.appendChild(outsideDiv);
     });
+    /* Check whether there are any elements or not */
     if(document.getElementById('deleteButton') !== null) booksDisplayed();
     changedRead();
 }
@@ -137,6 +140,8 @@ popupOpener.onclick = function(){
     return false;
 }
 
+
+/* This function adds event listeners to each delete button and will delete the book from the array and recall display books once deleted */
 function booksDisplayed(){
     let deleteButton = document.querySelectorAll('.deleteButton');
     for (let i = 0; i < deleteButton.length; i++){
@@ -148,6 +153,7 @@ function booksDisplayed(){
     }
 }
 
+/* Similarly. this function changes the read status while doing the same thing */
 function changedRead(){
     let readButton = document.querySelectorAll('#readButton');
     let deleteButton = document.querySelectorAll('.deleteButton');
