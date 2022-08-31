@@ -7,21 +7,16 @@ const formSubmit = document.getElementById("submitButton");
 
 
 /* Constructor to assign a book some values */
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.sayInfo = function() {
-        if(this.isRead){
-            return `${title} by ${author}, ${pages} pages, has been read`;
-        }
-        else{
-            return `${title} by ${author}, ${pages} pages, not read yet`
-        }
+class Book{
+    constructor(title, author, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
     }
+    
     /* This method changes the isRead status */
-    this.changedRead = function() {
+    changedRead() {
         if(this.isRead){
             this.isRead = false;
         }
@@ -31,11 +26,7 @@ function Book(title, author, pages, isRead) {
 
 /* This function adds a new book to the library using the constructor */
 function addBookToLibrary(title, author, pages, isRead){
-    let addBook = new Book();
-    addBook.title = title;
-    addBook.author = author;
-    addBook.pages = pages;
-    addBook.isRead = isRead;
+    let addBook = new Book(title, author, pages, isRead);
     myLibrary.push(addBook);
 }
 
